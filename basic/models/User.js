@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
-    name : {
-        type : String,
+    name: {
+        type: String,
         maxlength: 50
     },
     email: {
@@ -12,9 +15,9 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        minlength : 5
+        minlength: 5
     },
-    lastname : {
+    lastname: {
         type: String,
         maxlength: 50
     },
@@ -30,6 +33,49 @@ const userSchema = mongoose.Schema({
         type: Number
     }
 })
+
+//값을 저장하기 이전에 실행되는 함수
+//this 바인딩의 차이때문에 화살표함수 XX
+userSchema.pre('save', function (next) {
+    var user = this;    // 스키마 내부를 가리킨다
+
+    //password가 변환될 때만 실행
+    if (user.isModified('password')) {
+        console.log("패스워드 변경 전처리 시작");
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+            if (err) return next(err);
+            bcrypt.hash(user.password, salt, (err, hash) => {
+                if (err) return next(err);
+
+                //비밀번호 암호화를 성공했으면 변경 후 돌아간다
+                user.password = hash;
+                next();
+            });
+        });
+
+    } else {
+        next();
+    }
+});
+
+userSchema.methods.comparePassword = function (plainPassword, callback) {
+    //plainPW : 1234567   암호화된 PW : $2G1$0$l492vQ0M4...
+    bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
+        if (err) return callback(err);
+        callback(null, isMatch);
+    });
+};
+
+//jwt를 이용해서 토큰생성
+userSchema.methods.generateToken = function (callback) {
+    var user = this;
+    var token = jwt.sign(user._id.toHexString(), "anything");
+    user.token = token;
+    user.save(function (err, user) {
+        if (err) return callback(err);
+        callback(null, user);
+    })
+};
 
 const User = mongoose.model('User', userSchema)
 
