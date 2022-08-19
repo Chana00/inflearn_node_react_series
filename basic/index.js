@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 const config = require('./config/key');
+const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
 
 //application/x-www/form-urlencoded 데이터를 분석해서 가져올 수 있게 도와준다
@@ -24,7 +25,7 @@ app.get('/', (req, res) => {
   res.send('Hello world! 안녕하세요 get 접속입니다~')
 })
 
-app.post('/register', (req, res) => {
+app.post('/api/register', (req, res) => {
   //회원 가입에 필요한 정보들을 받으면 DB에 저장한다
   const user = new User(req.body);
 
@@ -39,7 +40,7 @@ app.post('/register', (req, res) => {
 //요청된 이메일을 DB에서 있는지 찾고
 //DB에 있다면 비밀번호가 맞는지 확인
 //비밀번호까지 맞다면 토큰 생성
-app.post('/login', (req, res) => {
+app.post('/api/users/login', (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
     //이메일이 DB에 없다면
     if (!user) {
@@ -67,6 +68,33 @@ app.post('/login', (req, res) => {
     });
   });
 });
+
+//role 0 : 일반유저 / role이 0이 아니면 관리자
+app.get('/api/users/auth', auth, (req, res) => {
+  //Auth = true 이후
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
+    email: req.user.email,
+    name: req.user.name
+  })
+
+
+})
+
+app.get('/api/users/logout', auth, (req, res) => {
+  User.findOneAndUpdate({ _id: req.user._id },
+    { token: "" },
+    (err, user) => {
+      if (err) return res.json({ success: false, err });
+      return res.status(200).send({
+        success: true
+      })
+    })
+
+})
+
 
 app.listen(port, () => {
   console.log(`${port}번 포트로 접속하였습니다.`)
