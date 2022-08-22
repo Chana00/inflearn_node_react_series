@@ -24,7 +24,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
                     }
 
                 } else if (adminRoute && !res.payload.isAdmin) {    //로그인했고 어드민이 아닌데 어드민페이지에 들어가려할 때
-                    navigate('/')    //로그인 상태
+                    navigate('/')    //기본 페이지로 돌아간다
 
                 } else if (option === false) {  //로그인한 유저가 출입 불가능한 페이지에 들어가려할 때
                     navigate('/')
