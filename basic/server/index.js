@@ -21,7 +21,7 @@ mongoose.connect(config.mongoURI, { dbName: 'node-react-basic' })
   .catch(err => console.log(err))
 
 
-app.get('/', (req, res) => {
+app.get('/api/hello', (req, res) => {
   res.send('Hello world! 안녕하세요 get 접속입니다~')
 })
 
