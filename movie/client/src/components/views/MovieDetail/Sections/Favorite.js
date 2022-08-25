@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import { Button } from 'antd';
+import { useCookies } from 'react-cookie';
 
 function Favorite(props) {
+    const [cookies, setCookie, removeCookie] = useCookies(['w_auth']);
     const movieId = props.movieId
     const userFrom = props.userFrom
     const movieTitle = props.movieInfo.title
     const moviePost = props.movieInfo.backdrop_path
     const movieRunTime = props.movieInfo.runtime
+    const cookie = cookies.w_auth;
 
     const [FavoriteNumber, setFavoriteNumber] = useState(0)
     const [Favorited, setFavorited] = useState(false)
@@ -71,12 +74,12 @@ function Favorite(props) {
         }
     }
 
-
     return (
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 
-            <Button onClick={onClickFavorite}>{Favorited ? "Not Favorite" : "Add to Favorite"} {FavoriteNumber} </Button>
-
+            {console.log("cookie", cookie)}
+            {cookie ? <Button onClick={onClickFavorite}>{Favorited ? "Not Favorite" : "Add to Favorite"} {FavoriteNumber} </Button>
+                : <Button >Add to Favorite with Login! </Button>}
 
         </div>
     )

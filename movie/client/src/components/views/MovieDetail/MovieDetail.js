@@ -51,7 +51,6 @@ function MovieDetail(props) {
             {/* Body */}
             <div style={{ width: '85%', margin: '1rem auto' }}>
                 <Favorite movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem('userId')} />
-
                 {/* Movie Info */}
                 <MovieInfo
                     movie={Movie}
@@ -62,6 +61,7 @@ function MovieDetail(props) {
                 <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
                     <button onClick={toggleActorView}>Toggle Actor View</button>
                 </div>
+
 
                 {/* ActorToggle이 True일 때만 보여준다 */}
                 {ActorToggle &&
