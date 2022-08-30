@@ -1,12 +1,24 @@
-import logo from './logo.svg';
+
 import './App.css';
-import LandingPages from './compnents/views/LandingPages';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import MainPage from './components/views/MainPage/MainPage';
+import SubPage from './components/views/SubPage.js/SubPage';
 
 function App() {
   return (
-    <div>
-      <Route path="/" />
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route exact path="/" element={<MainPage />} />
+          <Route exact path="/sub" element={<SubPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

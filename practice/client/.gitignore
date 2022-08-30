@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+/src/assets/webhwp
+/src/components/views/Footer/footer-component.jsx
+/src/components/views/Navbar/gate-gnb.jsx
+/public/logo-image.png
