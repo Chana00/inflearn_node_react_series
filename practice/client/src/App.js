@@ -7,7 +7,7 @@ import {
   Route,
 } from "react-router-dom";
 import MainPage from './components/views/MainPage/MainPage';
-import SubPage from './components/views/SubPage.js/SubPage';
+import SubPage from './components/views/SubPage/SubPage';
 
 function App() {
   return (

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import axios from 'axios';
 import Footer1 from '../Footer/footer-component.jsx'
 import Navbar1 from '../Navbar/gate-gnb.jsx'
+import SubPage from '../SubPage/SubPage'
 
 function MainPage() {
     useEffect(() => {
@@ -11,10 +12,11 @@ function MainPage() {
 
     return (
         <div>
-            <Navbar1/>
-            <h1>qwdqwd</h1>
-            hello
-            <div> gggg</div>
+            {/* <Navbar1/> */}
+            <h1>Hello, This is Main Page!</h1>
+
+            <SubPage/>
+            <br/>
             <Footer1/>
         </div>
 
