@@ -28,20 +28,19 @@ function SubPage() {
   return (
     <Box id='SubPage'>
       <p>SubPage Box</p>
-    <Stack direction="row" spacing={12}>
-      <Button className='ex-button' variant="contained" onClick={getValue}>실행</Button>
-      <Button className='ex-button' variant="contained">초기화</Button>
-    </Stack>
+      <Stack className="btn-stack" direction="row" spacing={12}>
+        <Button className='ex-button' variant="contained" onClick={getValue}>실행</Button>
+        <Button className='ex-button' variant="contained">초기화</Button>
+      </Stack>
 
-  <Stack direction="row" spacing={12}>
-    <Editor height='500px' width='600px'
-    defaultLanguage="javascript"
-    defaultValue={codeText}
-    onMount={handleEditorDidMount}
-    />
-  
-    <Box>{Value}</Box>
-    </Stack>
+      <Stack direction="row" spacing={12}>
+        <Editor height='500px' width='600px'
+          defaultLanguage="javascript"
+          defaultValue={codeText}
+          onMount={handleEditorDidMount}
+      />
+      <Box>{Value}</Box>
+      </Stack>
     </Box>
   )
 }

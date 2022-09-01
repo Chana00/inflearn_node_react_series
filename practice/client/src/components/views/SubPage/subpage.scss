@@ -5,7 +5,15 @@
     margin: 0 100px;
     padding: 20px;
     border: 1px solid black;
-    .ex-button {
-            width: 220px;
+    p {
+        font-size: 20px;
     }
+
+    .btn-stack {
+        margin: 30px;
+        .ex-button {
+            width: 220px;
+        }
+    }
+   
 }
