@@ -1,0 +1,12 @@
+.container {
+    height: 800px;
+    padding: 10px 50px;
+    position: relative;
+
+    div {
+        padding : 10px;
+        .main-title {
+            padding: 10px;
+        }
+    }
+}

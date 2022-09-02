@@ -2,6 +2,7 @@ const express = require('express');
 const logger = require('morgan')
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 5000;
+const fs = require('fs');
 
 
 const app = express();
@@ -43,5 +44,7 @@ app.get('/api/customers', (req, res) => {
         }
     ])
 });
+
+app.get('/api/fruits')
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

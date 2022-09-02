@@ -1,5 +1,5 @@
 
-import './App.css';
+import './App.scss';
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -7,7 +7,8 @@ import {
   Route,
 } from "react-router-dom";
 import MainPage from './components/views/MainPage/MainPage';
-import SubPage from './components/views/SubPage/SubPage';
+
+import EditorPage from './components/views/MainPage/EditorPage';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <div>
         <Routes>
           <Route exact path="/" element={<MainPage />} />
-          <Route exact path="/sub" element={<SubPage />} />
+          <Route exact path="/editor" element={<EditorPage />} />
         </Routes>
       </div>
     </Router>

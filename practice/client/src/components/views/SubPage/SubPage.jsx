@@ -3,8 +3,10 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Editor, { useMonaco } from '@monaco-editor/react'
-import MonokaiTheme from 'monaco-themes/themes/Monokai Bright.json'
+
+import axios from 'axios';
 import "./subpage.scss"
+
 
 
 
@@ -36,20 +38,19 @@ function SubPage() {
   }
 
   function textInit() {
-    const content = editorRef.current.setValue('');
+    const content = editorRef.current.setValue(codeText);
     setValue(content);
     
   }
 
   return (
     <Box id='SubPage'>
-      <p>SubPage Box</p>
-      <Stack className="btn-stack" direction="row" spacing={12}>
+      <Stack className="btn-stack" direction="row" spacing={10}>
         <Button className='ex-button' variant="contained" onClick={getValue}>실행</Button>
         <Button className='ex-button' variant="contained" onClick={textInit}>초기화</Button>
       </Stack>
 
-      <Stack direction="row" spacing={12}>
+      <Stack className="editor-stack" direction="row" spacing={20}>
         <Editor height='860px' width='480px'
           defaultLanguage="javascript"
           defaultValue={codeText}
@@ -71,7 +72,7 @@ function SubPage() {
             }
           }
       />
-      <Box>{Value}</Box>
+      <Box className="value-box">{Value}</Box>
       </Stack>
     </Box>
   )
