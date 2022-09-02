@@ -50,7 +50,7 @@ function SubPage() {
       </Stack>
 
       <Stack direction="row" spacing={12}>
-        <Editor height='600px' width='600px'
+        <Editor height='860px' width='480px'
           defaultLanguage="javascript"
           defaultValue={codeText}
           theme="monokai"

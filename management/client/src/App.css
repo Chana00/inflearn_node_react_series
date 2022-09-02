@@ -26,3 +26,12 @@
   }
 }
 
+
+#root {
+  width: "100%",;
+  margin-top: 50px;
+  overflow-x: "auto";
+}
+Paper.root Table.table {
+  min-width: 1080px;
+}
