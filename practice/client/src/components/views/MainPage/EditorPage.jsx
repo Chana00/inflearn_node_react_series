@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios';
-import Footer1 from '../Footer/footer-component.jsx'
 import Navbar2 from '../Navbar/Navbar.jsx';
 import SubPage from '../SubPage/SubPage.jsx';
 import Box from '@mui/material/Box'
@@ -22,7 +21,6 @@ function EditorPage() {
      <SubPage/>
 
     </Box>
-    <Footer1/>
 </div>
   )
 }

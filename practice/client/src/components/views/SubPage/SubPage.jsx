@@ -2,8 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Editor, { useMonaco } from '@monaco-editor/react'
-
+import Editor from '@monaco-editor/react'
+import MonokaiTheme from 'monaco-themes/themes/Monokai Bright.json'
 import axios from 'axios';
 import "./subpage.scss"
 
@@ -13,10 +13,18 @@ import "./subpage.scss"
 function SubPage() {
   const editorRef = useRef(null);
   const [Value, setValue] = useState('')
+  const [InitScript, setInitScript] = useState('')
   const codeText = `const test = 'it is test context!';`;
 
   useEffect(() => {
-    
+    axios.get("/api/editor")
+    .then(res => {
+      setValue(res.data);
+      setInitScript(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
 
   }, []);
   
@@ -33,13 +41,14 @@ function SubPage() {
   }
 
   function getValue(){
+    console.log("value : " + Value);
     const content = editorRef.current.getValue();
     setValue(content)
+    console.log("new value : " + Value);
   }
 
   function textInit() {
-    const content = editorRef.current.setValue(codeText);
-    setValue(content);
+    setValue(InitScript);
     
   }
 

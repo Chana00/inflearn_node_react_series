@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const path = require('path');
 
 
 router.get('/hello', (req, res) => {
@@ -16,16 +18,18 @@ router.get('/users/:id', (req, res) => {
 
 
 
-router.get('/run-example', (req, res) => {
+router.get('/editor', (req, res) => {
     let title = req.query.title;
     let exJS = req.query.main;
     let initJS = req.query.init;
-    let path = req.query.path;
-    console.log(`title = ${title}`);
-
-    res.send(
-        title
-    )
+    let context;
+    fs.readFile('./server/data/init.js', 'utf-8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+        context = data;
+        res.send(context);
+    });
 })
 
 module.exports = router;
