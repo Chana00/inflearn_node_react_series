@@ -2,7 +2,7 @@ const express = require('express');
 const logger = require('morgan')
 const bodyParser = require("body-parser");
 const indexRouter = require('./routes/index');
-const fs = require('fs');
+
 
 const app = express();
 app.set('port', process.env.PORT || 5000);
@@ -35,8 +35,7 @@ app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
 });
 
-app.get("/editor", (req, res) => {
-})
+
 
 
 

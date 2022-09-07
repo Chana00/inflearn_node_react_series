@@ -18,17 +18,21 @@ router.get('/users/:id', (req, res) => {
 
 
 
-router.get('/editor', (req, res) => {
-    let title = req.query.title;
-    let exJS = req.query.main;
-    let initJS = req.query.init;
-    let context;
+router.get('/editor/init', (req, res) => {
     fs.readFile('./server/data/init.js', 'utf-8', (err, data) => {
         if (err) {
             throw err;
         }
-        context = data;
-        res.send(context);
+        res.send(data);
+    });
+})
+
+router.get('/editor/example', (req, res) => {
+    fs.readFile('./server/data/example.js', 'utf-8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+        res.send(data);
     });
 })
 
